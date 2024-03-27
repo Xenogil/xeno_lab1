@@ -13,8 +13,10 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "rg-{NAHUM}-{random_integer.example.result}"
+  name     = format("rg-%s-%d", "NAHUM", random_integer.example.result)
   location = "West Europe"
+}
+
 }
 
 resource "random_integer" "example" {
