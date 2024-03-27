@@ -24,22 +24,16 @@ resource "azurerm_app_service_plan" "gil" {
   name                = format("asp-NAHUM-%d", random_integer.nah.result)
   location            = azurerm_resource_group.nah.location
   resource_group_name = azurerm_resource_group.nah.name
-  os_type             = "Linux"
+  kind             = "Linux"
   sku {
     tier = "Basic"
     size = "B1"
   }
 }
-resource "azurerm_linux_web_app" "gio" {
+resource "azurerm_linux_web_app" {
   name                = format("webapp-NAHUM-%d", random_integer.nah.result)
   location            = azurerm_resource_group.nah.location
   resource_group_name = azurerm_resource_group.nah.name
-
-  site_config {
-    java_version       = "java17"
-    java_server        = "JAVA"
-    java_server_version = "17"
-  }
 }
 
 
