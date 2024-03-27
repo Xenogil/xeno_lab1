@@ -17,12 +17,12 @@ resource "azurerm_resource_group" "example" {
   location = "West Europe"
 }
 
-resource "random_integer" "ex#1" {
+resource "random_integer" "nah" {
   min = 1000
   max = 9999
 }
 
-resource "azurerm_app_service_plan" "ex#2" {
+resource "azurerm_app_service_plan" "gil" {
   name                = format("asp-NAHUM-%d", random_integer.example.result)
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -33,7 +33,7 @@ resource "azurerm_app_service_plan" "ex#2" {
   }
 }
 
-resource "azurerm_linux_web_app" "ex#3" {
+resource "azurerm_linux_web_app" "gio" {
   name                = format("webapp-NAHUM-%d", random_integer.example.result)
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
