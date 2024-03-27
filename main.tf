@@ -15,19 +15,19 @@ provider "azurerm" {
 }
 
 # Génération d'un nombre entier aléatoire
-resource "random_integer" "example" {
+resource "random_integer" "ex#1" {
   min = 1000
   max = 9999
 }
 
 # Création du groupe de ressources Azure
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "ex#2" {
   name     = "rg-NAHUM-${random_integer.example.result}"
   location = "West Europe"
 }
 
 # Création du plan App Service
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_app_service_plan" "ex#3" {
   name                = "asp-NAHUM-${random_integer.example.result}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
