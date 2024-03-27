@@ -17,8 +17,6 @@ resource "azurerm_resource_group" "example" {
   location = "West Europe"
 }
 
-}
-
 resource "random_integer" "example" {
   min = 1000
   max = 9999
