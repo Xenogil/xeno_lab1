@@ -16,7 +16,7 @@ resource "random_integer" "nah" {
   max = 9999
 }
 
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "nah" {
   name     = format("rg-NAHUM-%d", random_integer.nah.result)
   location = "West Europe"
 }
