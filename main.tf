@@ -1,3 +1,4 @@
+# Configuration Terraform
 terraform {
   required_providers {
     azurerm = {
@@ -8,38 +9,47 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+# Fournisseur Azure
 provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = format("rg-%s-%d", "NAHUM", random_integer.example.result)
-  location = "West Europe"
-}
-
+# Génération d'un nombre entier aléatoire
 resource "random_integer" "example" {
   min = 1000
   max = 9999
 }
 
+# Création du groupe de ressources Azure
+resource "azurerm_resource_group" "example" {
+  name     = "rg-NAHUM-${random_integer.example.result}"
+  location = "West Europe"
+}
+
+# Création du plan App Service
 resource "azurerm_app_service_plan" "example" {
-  name                = "asp-{NAHUM}-${random_integer.example.result}"
+  name                = "asp-NAHUM-${random_integer.example.result}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  kind                = "Linux"
+  reserved            = true
+
   sku {
     tier = "Basic"
     size = "B1"
   }
 }
 
+# Création de l'application Web Linux
 resource "azurerm_linux_web_app" "example" {
-  name                = "webapp-{NAHUM}-${random_integer.example.result}"
+  name                = "webapp-NAHUM-${random_integer.example.result}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  app_service_plan_id = azurerm_app_service_plan.example.id
 
   site_config {
-    java_version       = "java17"
-    java_server        = "JAVA"
-    java_server_version = "17"
+    java_version       = "1.8" # Choisir la version Java appropriée
+    java_container     = "TOMCAT" # Remplacer par le conteneur approprié si nécessaire
   }
 }
+
