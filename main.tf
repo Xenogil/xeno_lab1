@@ -20,7 +20,25 @@ resource "azurerm_resource_group" "nah" {
   name     = format("rg-NAHUM-%d", random_integer.nah.result)
   location = "West Europe"
 }
-
+resource "azurerm_service_plan" "gio" {
+  name                = format("rg-NAHUM-%d", random_integer.nah.result)
+  location            = azurerm_resource_group.nah.location
+  resource_group_name = azurerm_resource_group.nah.name
+  os_type             = "Linux"
+  sku_name            = B1
+}
+resource "azurerm_linux_web_app" "nahgio" {
+  name                = webapp-format("rg-NAHUM-%d", random_integer.nah.result)
+  location            = azurerm_resource_group.nah.location
+  resource_group_name = azurerm_resource_group.nah.name
+  
+site_config {
+       application_stack{
+              java_version         = "java17"
+              java_server          = "JAVA"
+              java_server_version  = "17"
+       }
+}
 
 
 
