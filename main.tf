@@ -25,12 +25,13 @@ resource "azurerm_service_plan" "gio" {
   location            = azurerm_resource_group.nah.location
   resource_group_name = azurerm_resource_group.nah.name
   os_type             = "Linux"
-  sku_name            = B1
+  sku_name            = "B1"
 }
 resource "azurerm_linux_web_app" "nahgio" {
   name                = format("webapp-NAHUM-%d", random_integer.nah.result)
   location            = azurerm_resource_group.nah.location
   resource_group_name = azurerm_resource_group.nah.name
+  service_plan_id     = azurem_service_plan.gio
   site_config {
          application_stack{
                 java_version         = "java17"
