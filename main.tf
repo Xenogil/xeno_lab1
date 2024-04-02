@@ -31,7 +31,7 @@ resource "azurerm_linux_web_app" "nahgio" {
   name                = format("webapp-NAHUM-%d", random_integer.nah.result)
   location            = azurerm_resource_group.nah.location
   resource_group_name = azurerm_resource_group.nah.name
-  service_plan_id     = azurem_service_plan.gio
+  service_plan_id     = azurem_service_plan.nahgio
   site_config {
          application_stack{
                 java_version         = "java17"
