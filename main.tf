@@ -5,6 +5,12 @@ terraform {
       version = "~> 3.0.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = rg-nahum-tfstate
+    storage_account_name = sanahumtfstate
+    container_name       = container-nahum-tfstate
+    key                  = "terraform.tfstate"
+  }
   required_version = ">= 0.14.9"
 }
 
